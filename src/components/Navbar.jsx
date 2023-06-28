@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 function Navbar(props) {
     
 
@@ -19,7 +20,8 @@ function Navbar(props) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
                             </svg>
                             <span className="text-2xl text-indigo-600 font-bold hidden md:block">
-                                Book Store
+                                <Link to="/">
+                                Book Store</Link>
                             </span>
                         </li>
                         <li className="flex gap-3 ">
@@ -29,7 +31,9 @@ function Navbar(props) {
                                 </svg>
 
                                <span className="hidden md:block">
-                                 Create Book
+                                 <Link to="/create">
+                                    Create Book
+                                 </Link>
                                </span>
                             </button>
                             <div className="w-11 ">
