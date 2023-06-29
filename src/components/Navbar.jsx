@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
+
 function Navbar(props) {
     
-
     return (
       
             <nav className="border-b-2">
