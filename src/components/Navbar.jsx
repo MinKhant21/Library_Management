@@ -2,12 +2,14 @@ import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import { ThemeContext } from "../contexts/themeContexts"
 import useTheme from "../hook/useTheme"
+import lightIcon from '../assets/light.svg'
+import darkIcon from '../assets/dark.svg'
 function Navbar(props) {
 let {theme,ChangeTheme} = useTheme()
     
     return (
       
-            <nav onClick={ChangeTheme} className={`border-b-2 ${theme == 'dark' ? 'bg-slate-600' : 'bg-yellow-500'}`}>
+            <nav className={`border-b-2 ${theme == 'dark' ? 'bg-slate-600' : 'bg-yellow-500'}`}>
                     <ul className="flex justify-between item-center p-4 max-w-6xl mx-auto ">
                         <li className="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -41,6 +43,10 @@ let {theme,ChangeTheme} = useTheme()
                             <div className="w-11 ">
                                  
                                 <img src="https://avatars.githubusercontent.com/u/102233767?v=4" alt="" className="w-full rounded-2xl" />
+                            </div>
+                            <div className="coursor-pointer">
+                                { theme == 'dark' && <img src={lightIcon} alt="" className="w-8" onClick={()=>ChangeTheme('light')} />}
+                                { theme == 'light' && <img src={darkIcon} alt="" className="w-8" onClick={()=>ChangeTheme('dark')} />}
                             </div>
                         </li>
                     </ul>
