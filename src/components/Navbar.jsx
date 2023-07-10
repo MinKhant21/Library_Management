@@ -1,12 +1,13 @@
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import { ThemeContext } from "../contexts/themeContexts"
+import useTheme from "../hook/useTheme"
 function Navbar(props) {
-let {theme} = useContext(ThemeContext)
+let {theme,ChangeTheme} = useTheme()
     
     return (
       
-            <nav className={`border-b-2 ${theme == 'dark' ? 'bg-slate-600' : 'bg-yellow-500'}`}>
+            <nav onClick={ChangeTheme} className={`border-b-2 ${theme == 'dark' ? 'bg-slate-600' : 'bg-yellow-500'}`}>
                     <ul className="flex justify-between item-center p-4 max-w-6xl mx-auto ">
                         <li className="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
