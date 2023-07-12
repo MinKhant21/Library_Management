@@ -1,11 +1,12 @@
 import { useLocation, useParams } from "react-router-dom"
 import useFetch from "../hook/useFetch";
 import bookImg from "../assets/books.jpeg"
+import db from "../firebase"
 function BookDetail(props) {
     let location = useLocation();
     let params = useParams('id');
     // console.log(params.id)
-    let {data,loading,error} = useFetch(`http://localhost:3000/books/${params.id}`)
+    // let {data,loading,error} = useFetch(`http://localhost:3000/books/${params.id}`)
     return (
         <>
           {loading && <p>Loading ......</p>}
