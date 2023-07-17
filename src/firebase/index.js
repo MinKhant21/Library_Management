@@ -1,21 +1,19 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyBXFhz2Mm_eHSNeOxbZcJHnqgIZnXxqZbI",
-  authDomain: "library-app-61a6e.firebaseapp.com",
-  projectId: "library-app-61a6e",
-  storageBucket: "library-app-61a6e.appspot.com",
-  messagingSenderId: "422138297846",
-  appId: "1:422138297846:web:8fb743033dcb858c5a5bd7",
-  measurementId: "G-61LR1RQWBJ"
+  apiKey: "AIzaSyAemGpMy5U7b8DOWHO9qrzAPsZea1Jw1-U",
+  authDomain: "libraryapp-34d1b.firebaseapp.com",
+  projectId: "libraryapp-34d1b",
+  storageBucket: "libraryapp-34d1b.appspot.com",
+  messagingSenderId: "627581379462",
+  appId: "1:627581379462:web:bfe9a9e5bd473c7160c207"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// init firebase
+initializeApp(firebaseConfig)
 
-export default { db }
+// init firestore service
+const db = getFirestore()
+export default db
+
+

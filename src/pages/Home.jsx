@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 import useFetch from "../hook/useFetch";
 import { Link } from "react-router-dom";
 import db from '../firebase'
-import { CollectionReference, DocumentReference, collection } from "firebase/firestore";
+import {  collection } from "firebase/firestore";
 
 function Home ()
 {
@@ -12,8 +12,7 @@ function Home ()
   let [books , setBooks] = useState([])
   // let {books,loading,error} = useFetch('http://localhost:3000/books');
   useEffect(()=>{
- 
-    collection('books')
+    console.log(collection(db,"books"))
   },[])
   return(
     <>
