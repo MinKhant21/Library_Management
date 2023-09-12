@@ -14,7 +14,6 @@ function Create ()
     e.preventDefault()
     setinsertCategory(prevState =>[ category , ...prevState])
     setCategory("")
-    
   }
 
   let creatBook = (e) => {
@@ -24,16 +23,24 @@ function Create ()
       description : description,
       categories:insertCategory
     }
-    setPostData(data)
-    
-
+    const reqBody = {
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      method: "POST",
+      body : JSON.stringify(data)
+    }
+    fetch('http://localhost:4000/api/books', reqBody)
+      .then(res => {
+      console.log(res)
+    })
   }
-   useEffect(() => {
-        if (book) {
-          // console.log(book)
-          navigate('/')
-        }
-    }, [book])
+  //  useEffect(() => {
+  //       if (book) {
+  //         // console.log(book)
+  //         navigate('/')
+  //       }
+  //   }, [book])
 
 
   return(

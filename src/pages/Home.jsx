@@ -3,17 +3,14 @@ import books from  '../assets/books.jpeg'
 import Hero from "../components/Hero";
 import useFetch from "../hook/useFetch";
 import { Link } from "react-router-dom";
-import db from '../firebase'
-import {  collection } from "firebase/firestore";
+// import db from '../firebase/index'
 
 function Home ()
 {
-  let [loading , setLoading] = useState('')
-  let [books , setBooks] = useState([])
-  // let {books,loading,error} = useFetch('http://localhost:3000/books');
-  useEffect(()=>{
-    console.log(collection(db,"books"))
-  },[])
+  // let [loading , setLoading] = useState('')
+  // let [books , setBooks] = useState([])
+  let {books,loading,error} = useFetch('http://localhost:3000/books');
+  console.log(books)
   return(
     <>
         {loading &&  <p>Loading......</p> }
