@@ -4,7 +4,7 @@ import {
 
 import Layout from '../pages/Layout/Layout';
 import Home from '../pages/Home';
-import Create from '../pages/Create';
+import SubmitForm from '../pages/SubmitForm';
 import Search from '../pages/Search';
 import BookDetail from "../pages/BookDetail";
 
@@ -23,7 +23,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/create",
-                element: <Create />
+                element: <SubmitForm />
+            },
+            {
+                path: "/edit/:id",
+                element: <SubmitForm />
             },
             {
                 path: "/search",

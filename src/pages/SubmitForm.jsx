@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hook/useFetch";
-import { addDoc, collection, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
-function Create ()
+function SubmitForm ()
 {
+  let {id} = useParams();
+  let [isEdit , setIsEdit] = useState(false)
+
   let [title , setTitle] = useState('')
   let [description , setDescription] = useState('')
   let [category , setCategory] = useState('')
   let [insertCategory , setinsertCategory] = useState([])
-  let {setPostData , data : book  , loading , error} = useFetch('http://localhost:3000/books','POST');
+  // let {setPostData , data : book  , loading , error} = useFetch('http://localhost:3000/books','POST');
   let  navigate = useNavigate();
   let addCateogry = (e) =>{
     e.preventDefault()
@@ -18,7 +21,7 @@ function Create ()
     setCategory("")
   }
 
-  let creatBook = (e) => {
+  let submitBook = async (e) => {
     e.preventDefault()
     let data = {
       title : title,
@@ -26,17 +29,32 @@ function Create ()
       categories:insertCategory,
       date : serverTimestamp()
     }
-    let ref = collection(db,'books')
-    addDoc(ref,data)
+    if(isEdit){
+      let ref = doc(db,'books',id);
+      await updateDoc(ref,data)
+    }else{
+      let ref = collection(db,'books')
+      addDoc(ref,data)
+    }
     navigate('/')
-   
   }
-  //  useEffect(() => {
-  //       if (book) {
-  //         // console.log(book)
-  //         navigate('/')
-  //       }
-  //   }, [book])
+   useEffect(() => {
+       if(id){
+        setIsEdit(true)
+        let ref = doc(db,'books',id);
+        getDoc(ref).then(doc=>{
+          let {title , description , categories} = doc.data();
+          setTitle(title)
+          setDescription(description)
+          setCategory(categories)
+        })
+       }else{
+        setIsEdit(false)
+        setTitle('')
+          setDescription('')
+          setCategory('')
+       }
+    }, [id])
 
 
   return(
@@ -84,11 +102,9 @@ function Create ()
         </div>
       </div>
 
-      <button onClick={creatBook} type="submit" className="px-3 py-2 bg-indigo-600  text-white rounded-2xl flex justify-center items-center gap-1 w-full ">
+      <button onClick={submitBook} type="submit" className="px-3 py-2 bg-indigo-600  text-white rounded-2xl flex justify-center items-center gap-1 w-full ">
           <span className="hidden md:block font-bold">
-            <Link to="/create">
-              Create Book
-            </Link>
+              {isEdit ? "Update book" : "Create Book" }
           </span>
       </button>
       
@@ -97,4 +113,4 @@ function Create ()
   )
 }
 
-export default Create
+export default SubmitForm

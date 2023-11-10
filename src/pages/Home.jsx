@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+
 import books from  '../assets/books.jpeg'
 import Hero from "../components/Hero";
-import useFetch from "../hook/useFetch";
-import { Link } from "react-router-dom";
 import bookImg from '../assets/books.jpeg';
 import deleteSvg from '../assets/delete.svg';
+import editSvg from '../assets/edit.svg';
+
+import useFetch from "../hook/useFetch";
+import { Link } from "react-router-dom";
+
 import {db} from '../firebase'
 import { collection, deleteDoc, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 
@@ -65,7 +69,7 @@ function Home ()
                         books.map(b => 
                         <Link to={`/books/${b.id}`} key={b.id}>
                             <div className='p-4 border border-1'>
-                                <img src={bookImg} alt="" />
+                                <img src={bookImg} className=" w-full" alt="" />
                                 <div className='text-center space-y-2 mt-3'>
                                     <h1>{b.title}</h1>
                                     <p>{b.description}</p>
@@ -82,8 +86,14 @@ function Home ()
                                             )
                                         }
                                         </div>
-                                        <div onClick={(e) => deleteBook(e,b.id)}>
-                                            <img src={deleteSvg} alt="" />
+                                       
+                                        <div  className=" flex items-center justify-between gap-3">
+                                            <Link to={`/edit/${b.id}`} className="">
+                                                <img src={editSvg} alt="" />
+                                            </Link>
+                                            <div onClick={(e) => deleteBook(e,b.id)}>
+                                                <img src={deleteSvg} alt="" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
