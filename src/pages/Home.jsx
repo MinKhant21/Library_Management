@@ -4,8 +4,9 @@ import Hero from "../components/Hero";
 import useFetch from "../hook/useFetch";
 import { Link } from "react-router-dom";
 import bookImg from '../assets/books.jpeg';
+import deleteSvg from '../assets/delete.svg';
 import {db} from '../firebase'
-import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 
 function Home ()
 {
@@ -43,6 +44,13 @@ function Home ()
         fetchBook();
     },[fetchBook])
     
+    let deleteBook = (e,id) => {
+        e.preventDefault();
+        let ref = doc(db,'books',id)
+        deleteDoc(ref)
+        console.log(books)
+    }
+    
     if (error) {
         return <p>{error}</p>
     }
@@ -62,7 +70,8 @@ function Home ()
                                     <h1>{b.title}</h1>
                                     <p>{b.description}</p>
                                     {/* genres */}
-                                    {/* <div className='flex flex-wrap'>
+                                    <div className='flex flex-wrap justify-between'>
+                                        <div>
                                         {
                                             b.categories.map((c)=>
                                                 <span key={c}
@@ -72,7 +81,11 @@ function Home ()
                                                 {c}</span>
                                             )
                                         }
-                                    </div> */}
+                                        </div>
+                                        <div onClick={(e) => deleteBook(e,b.id)}>
+                                            <img src={deleteSvg} alt="" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </Link>
