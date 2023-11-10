@@ -10,7 +10,7 @@ import useFetch from "../hook/useFetch";
 import { Link } from "react-router-dom";
 
 import {db} from '../firebase'
-import { collection, deleteDoc, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 
 function Home ()
 {
@@ -21,7 +21,7 @@ function Home ()
     const fetchBook = async () => {
         const ref = collection(db, 'books');
         let q = query(ref,orderBy('date','desc'))
-        await  getDocs(q).then(docs=>
+        onSnapshot(q,docs=>
             {
                 if(doc.empty){
                     setError('no doc found')
@@ -40,8 +40,8 @@ function Home ()
                     setLoading(false)
                 }
                 
-            }
-        );
+            })
+        
         // console.log(documentSnapshot.data())
     }
     useEffect(()=>{

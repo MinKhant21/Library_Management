@@ -3,7 +3,7 @@ import useFetch from "../hook/useFetch";
 import bookImg from "../assets/books.jpeg"
 import {db} from "../firebase"
 import { useEffect, useState } from "react";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 function BookDetail(props) {
     let location = useLocation();
     let {id} = useParams();
@@ -15,7 +15,7 @@ function BookDetail(props) {
 
     useEffect(() => {
         let ref = doc(db,'books',id);
-        getDoc(ref).then(doc=>{
+        onSnapshot(ref,doc=>{
             if(doc.empty){
                 setError('no doc found')
             }else{

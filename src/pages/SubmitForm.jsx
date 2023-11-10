@@ -46,7 +46,7 @@ function SubmitForm ()
           let {title , description , categories} = doc.data();
           setTitle(title)
           setDescription(description)
-          setCategory(categories)
+          setinsertCategory(categories)
         })
        }else{
         setIsEdit(false)
