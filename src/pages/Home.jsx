@@ -5,7 +5,7 @@ import useFetch from "../hook/useFetch";
 import { Link } from "react-router-dom";
 import bookImg from '../assets/books.jpeg';
 import {db} from '../firebase'
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 
 function Home ()
 {
@@ -15,7 +15,8 @@ function Home ()
     let [books,setBooks] = useState('');
     const fetchBook = async () => {
         const ref = collection(db, 'books');
-        await  getDocs(ref).then(docs=>
+        let q = query(ref,orderBy('date','desc'))
+        await  getDocs(q).then(docs=>
             {
                 if(doc.empty){
                     setError('no doc found')

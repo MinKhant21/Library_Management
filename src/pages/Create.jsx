@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useFetch from "../hook/useFetch";
+import { addDoc, collection, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 
 function Create ()
 {
@@ -21,19 +23,13 @@ function Create ()
     let data = {
       title : title,
       description : description,
-      categories:insertCategory
+      categories:insertCategory,
+      date : serverTimestamp()
     }
-    const reqBody = {
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      method: "POST",
-      body : JSON.stringify(data)
-    }
-    fetch('http://localhost:4000/api/books', reqBody)
-      .then(res => {
-      console.log(res)
-    })
+    let ref = collection(db,'books')
+    addDoc(ref,data)
+    navigate('/')
+   
   }
   //  useEffect(() => {
   //       if (book) {
