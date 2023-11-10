@@ -7,6 +7,8 @@ import Home from '../pages/Home';
 import SubmitForm from '../pages/SubmitForm';
 import Search from '../pages/Search';
 import BookDetail from "../pages/BookDetail";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
             {
                 path: "/search",
                 element: <Search />
+            },
+            {
+                path: "/login",
+                element: <Login />
+            },
+            {
+                path: "/register",
+                element: <Register />
             }
         ]
     },

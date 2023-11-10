@@ -6,13 +6,16 @@ import {
     RouterProvider,
   } from "react-router-dom";
 import { ThemeProvider } from './contexts/themeContexts';
+import AuthContextProvider from './contexts/AuthContexts';
 
   
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-        <ThemeProvider>
+  <AuthContextProvider s>
+    <ThemeProvider>
           <RouterProvider router={router} />
-        </ThemeProvider>
+    </ThemeProvider>
+  </AuthContextProvider>
 )
 
 
