@@ -17,18 +17,23 @@ function Home ()
         const ref = collection(db, 'books');
         await  getDocs(ref).then(docs=>
             {
-                let books = [];
-                docs.forEach(doc=>
-                    {
-                        let book = {
-                            id : doc.id,
-                            ...doc.data()
+                if(doc.empty){
+                    setError('no doc found')
+                }else{
+                    let books = [];
+                    docs.forEach(doc=>
+                        {
+                            let book = {
+                                id : doc.id,
+                                ...doc.data()
+                            }
+                            books.push(book);
                         }
-                        books.push(book);
-                    }
-                )
-                setBooks(books)
-
+                    )
+                    setBooks(books)
+                    setLoading(false)
+                }
+                
             }
         );
         // console.log(documentSnapshot.data())
